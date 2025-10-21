@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface User {
   id: number;
@@ -9,6 +9,7 @@ interface User {
   email: string;
   bio: string;
   profile_pic: string;
+  created_at?: string;
 }
 
 interface AuthContextType {
