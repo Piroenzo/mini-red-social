@@ -17,7 +17,14 @@ app = Flask(__name__)
 
 # Configuración
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///red_social.db')
+
+# Usar PostgreSQL si está disponible, sino SQLite
+database_url = os.getenv('DATABASE_URL')
+if database_url and database_url.startswith('postgresql://'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///red_social.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'jwt-secret-key')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
