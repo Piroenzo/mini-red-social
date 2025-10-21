@@ -9,8 +9,6 @@ from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 import base64
-from io import BytesIO
-from PIL import Image
 
 # Cargar variables de entorno
 load_dotenv()
