@@ -3,7 +3,7 @@ import axios from 'axios';
 import PostCard from './PostCard';
 import NewPostModal from './NewPostModal';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface Post {
   id: number;
