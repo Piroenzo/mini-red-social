@@ -141,7 +141,7 @@ const Profile: React.FC = () => {
             <h2>{user.username}</h2>
             <p className="profile-email">{user.email}</p>
             <p className="profile-join-date">
-              Se unió el {formatDate(user.created_at)}
+              Se unió el {user.created_at ? formatDate(user.created_at) : 'Fecha no disponible'}
             </p>
             
             {editing ? (
