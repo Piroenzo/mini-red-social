@@ -29,7 +29,11 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
-CORS(app, origins=[os.getenv('FRONTEND_URL', 'http://localhost:5173')])
+CORS(app, origins=[
+    os.getenv('FRONTEND_URL', 'http://localhost:5173'),
+    'https://mini-red-social-1788.onrender.com',
+    'http://localhost:5173'
+])
 
 # Modelos
 class User(db.Model):
@@ -399,6 +403,11 @@ def create_comment(post_id):
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'OK', 'message': 'API funcionando correctamente'})
+
+# Ruta de prueba CORS
+@app.route('/api/test', methods=['GET', 'POST', 'OPTIONS'])
+def test_cors():
+    return jsonify({'message': 'CORS funcionando correctamente'})
 
 # Crear tablas
 with app.app_context():
